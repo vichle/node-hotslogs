@@ -4,7 +4,7 @@ Node-wrapper for HOTSLogs API
 ## Install
 
 ## Usage
-```
+```js
 hotslogs = require('hotslogs');
 
 hotslogs.getEvents().then(function(events){...});
