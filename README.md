@@ -8,7 +8,7 @@ npm install node-hotslogs
 
 ## Usage
 ```js
-hotslogs = require('hotslogs');
+hotslogs = require('node-hotslogs');
 
 hotslogs.getEvents().then(function(events){...});
 hotslogs.getEvent(1001).then(function(event){...});
