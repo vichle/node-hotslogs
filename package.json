@@ -1,0 +1,39 @@
+{
+  "name": "node-hotslogs",
+  "version": "0.0.0",
+  "description": "Node-Wrapper for HOTSLogs API",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "superagent": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "lodash": "^4.13.1",
+    "mocha": "^2.4.5"
+  },
+  "scripts": {
+    "test": "grunt mochaTest",
+    "prepublish": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vichle/node-hotslogs.git"
+  },
+  "keywords": [
+    "hotslogs",
+    "hots",
+    "Heroes of the Storm"
+  ],
+  "author": "Viktor Ljungström",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vichle/node-hotslogs/issues"
+  },
+  "homepage": "https://github.com/vichle/node-hotslogs#readme"
+}
