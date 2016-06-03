@@ -10,7 +10,7 @@ describe 'node-hotslogs', ->
       .then (events) ->
         return done new Error "Not an array" unless _.isArray events
         done()
-      .catch (err) -> done err
+      .catch done
 
   describe '#getEvent(eventId)', ->
     it 'should return an event', (done) ->
@@ -18,7 +18,7 @@ describe 'node-hotslogs', ->
       .then (event) ->
         return done new Error "Not an event" unless event.ID?
         done()
-      .catch (err) -> done err
+      .catch done
 
   describe '#getPlayer(playerId)', ->
     it 'should return a player', (done) ->
@@ -26,7 +26,7 @@ describe 'node-hotslogs', ->
       .then (player) ->
         return done new Error "Wrong player" unless player.Name is 'vichle'
         done()
-      .catch (err) -> done err
+      .catch done
 
   describe '#getPlayer(region, battleTag)', ->
     it 'should return a player', (done) ->
@@ -34,4 +34,13 @@ describe 'node-hotslogs', ->
       .then (player) ->
         return done new Error "Wrong player" unless player.Name is 'vichle'
         done()
-      .catch (err) -> done err
+      .catch done
+
+  describe '#getEventTrees', ->
+    it 'should return an event tree', (done) ->
+      hotslogs.getEventTrees()
+      .then (eventTrees) ->
+        return done new Error "Not an array" unless _.isArray eventTrees
+        return done new Error "Not an event tree" unless _.isArray eventTrees[0].EventChildren
+        done()
+      .catch done
