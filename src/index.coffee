@@ -12,7 +12,7 @@ getPromise = (url) ->
         return resolve res.body
 
 createTrees = (nodes, parentId, idField, parentIdField) ->
-  thisLevelNodes = _.remove nodes, parentIdField, parentId
+  thisLevelNodes = _.remove nodes, (node) -> node[parentIdField] is parentId
   for node in thisLevelNodes
     node.EventChildren = createTrees nodes, node[idField], idField, parentIdField
   return thisLevelNodes
