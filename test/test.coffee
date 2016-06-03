@@ -41,6 +41,9 @@ describe 'node-hotslogs', ->
       hotslogs.getEventTrees()
       .then (eventTrees) ->
         return done new Error "Not an array" unless _.isArray eventTrees
-        return done new Error "Not an event tree" unless _.isArray eventTrees[0].EventChildren
-        done()
+        return done new Error "EventChildren is not an array" unless _.isArray eventTrees[0].EventChildren
+
+        for eventTree in eventTrees
+          return done() if eventTree.EventChildren.length > 0
+        done new Error "Not an event tree"
       .catch done
