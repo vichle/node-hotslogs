@@ -24,6 +24,10 @@ hotslogs =
     KR: 3
     CN: 5
 
+  getHeroes: -> getPromise "#{API_URL}/Data/Heroes"
+
+  getMaps: -> getPromise "#{API_URL}/Data/Maps"
+
   getEvents: -> getPromise "#{API_URL}/Events"
 
   getEvent: (eventId) -> getPromise "#{API_URL}/Events/#{eventId}"
