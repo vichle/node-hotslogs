@@ -1,5 +1,9 @@
 module.exports = (grunt) ->
   grunt.initConfig
+    coffeelint:
+      app: ['src/*.coffee', 'test/*.coffee']
+      options:
+        configFile: 'coffeelint.json'
     coffee:
       compile:
         files:
@@ -11,5 +15,6 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-mocha-test'
+  grunt.loadNpmTasks 'grunt-coffeelint'
 
   grunt.registerTask 'default', ['coffee', 'mochaTest']

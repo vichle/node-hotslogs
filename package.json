@@ -13,12 +13,14 @@
   "devDependencies": {
     "chai": "~3.5.0",
     "grunt": "~1.0.1",
+    "grunt-coffeelint": "0.0.16",
     "grunt-contrib-coffee": "~1.0.0",
     "grunt-mocha-test": "~0.12.7",
     "mocha": "~3.1.2"
   },
   "scripts": {
-    "test": "grunt"
+    "build": "grunt coffeelint coffee",
+    "test": "npm run build && grunt mochaTest"
   },
   "repository": {
     "type": "git",
