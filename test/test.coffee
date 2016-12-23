@@ -1,69 +1,62 @@
-assert = require 'assert'
+assert = require('chai').assert
 should = require('chai').should()
 hotslogs = require '../lib/index.js'
 _ = require 'lodash'
 
+firstEventId = null
+
 describe 'node-hotslogs', ->
   describe '#getEvents', ->
-    it 'should return an array of events', (done) ->
+    it 'should return an array of events', ->
       hotslogs.getEvents()
       .then (events) ->
-        return done new Error "Not an array" unless _.isArray events
-        return done new Error "Array is empty" unless events.length > 0
-        return done new Error "Invalid event data" unless events[0].EventID?
-        done()
-      .catch done
+        assert _.isArray(events), "Not an array"
+        assert events.length > 0, "Array is empty"
+        assert events[0].EventID?, "Invalid event data"
+        firstEventId = events[0].EventID
+    .timeout 5000
 
   describe '#getEvent(eventId)', ->
-    it 'should return an event', (done) ->
-      hotslogs.getEvent 1001
+    it 'should return an event', ->
+      assert firstEventId?, "No firstEventId found"
+      hotslogs.getEvent firstEventId
       .then (event) ->
-        return done new Error "Invalid event data" unless event.ID?
-        done()
-      .catch done
+        assert event?, 'No event'
+        assert event.ID?, 'Invalid event'
+    .timeout 15000 # If the topmost event is the one thats being fetched, it can take a long time :(
 
   describe '#getPlayer(playerId)', ->
-    it 'should return a player', (done) ->
+    it 'should return a player', ->
       hotslogs.getPlayer 2947680
       .then (player) ->
-        return done new Error "Wrong player" unless player.Name is 'vichle'
-        done()
-      .catch done
+        assert player.Name is 'vichle', "Wrong player"
 
   describe '#getPlayer(region, battleTag)', ->
-    it 'should return a player', (done) ->
+    it 'should return a player', ->
       hotslogs.getPlayer hotslogs.REGIONS.EU, 'vichle#1737'
       .then (player) ->
-        return done new Error "Wrong player" unless player.Name is 'vichle'
-        done()
-      .catch done
+        assert player.Name is 'vichle', "Wrong player"
 
   describe '#getEventTrees', ->
-    it 'should return an event tree', (done) ->
+    it 'should return an event tree', ->
       hotslogs.getEventTrees()
       .then (eventTrees) ->
-        return done new Error "Not an array" unless _.isArray eventTrees
-        return done new Error "Array is empty" unless eventTrees.length > 0
-        return done new Error "EventChildren is not an array" unless _.isArray eventTrees[0].EventChildren
-
-        for eventTree in eventTrees
-          return done() if eventTree.EventChildren.length > 0
-        done new Error "Not an event tree"
-      .catch done
+        assert _.isArray eventTrees, "Not an array"
+        assert eventTrees.length > 0, "Array is empty"
+        assert _.isArray eventTrees[0].EventChildren, "EventChildren is not an array"
 
   describe '#getHeroes', ->
-    it 'should return an array of heroes', (done) ->
+    it 'should return an array of heroes', ->
       hotslogs.getHeroes()
       .then (heroes) ->
-        return done new Error "Not an array" unless _.isArray heroes
-        return done new Error "Array is empty" unless heroes.length > 0
-        return done new Error "Invalid hero data" unless heroes[0].PrimaryName?
-        done()
+        assert _.isArray heroes, "Not an array"
+        assert heroes.length > 0, "Array is empty"
+        assert heroes[0].PrimaryName?, "Invalid hero data"
 
   describe '#getMaps', ->
-    hotslogs.getMaps()
-    .then (maps) ->
-      return done new Error "Not an array" unless _.isArray maps
-      return done new Error "Array is empty" unless maps.length > 0
-      return done new Error "Invalid map data" unless maps[0].PrimaryName?
-      done()
+    it 'should return map data', ->
+      hotslogs.getMaps()
+      .then (maps) ->
+        assert _.isArray maps, "Not an array"
+        assert maps.length > 0, "Array is empty"
+        assert maps[0].PrimaryName?, "Invalid map data"

@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/node-hotslogs.svg)](https://badge.fury.io/js/node-hotslogs)
 # node-hotslogs
 Node-wrapper for HOTSLogs API (with some sugar)
 
